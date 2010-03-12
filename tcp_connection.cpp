@@ -1,5 +1,7 @@
 #include "tcp_connection.hpp"
 
+#include <sstream>
+
 using namespace std;
 using namespace boost;
 using namespace boost::asio;
@@ -18,11 +20,11 @@ tcp::socket& tcp_connection::socket()
 void tcp_connection::start()
 {
     if(!_socket.is_open()) return;
-    _message = "Hello world!";
-    async_write(_socket, buffer(_message),
-                bind(&tcp_connection::handle_write, shared_from_this(),
-                     placeholders::error,
-                     placeholders::bytes_transferred));
+    _message = "CO_SERVER";
+    stringstream s;
+    Serialize(s, _message);
+    async_write(_socket, buffer(s.str()), bind(&tcp_connection::handle_write, shared_from_this(), placeholders::error,
+                        placeholders::bytes_transferred));
     async_read(_socket, buffer(_buf), bind(&tcp_connection::handle_read, shared_from_this(), placeholders::error,
                         placeholders::bytes_transferred));
 }

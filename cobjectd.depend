@@ -117,11 +117,12 @@
 	"util.hpp"
 	"fnwrap.hpp"
 
-1268149504 /home/mallard/Projects/cobjectd/tcp_connection.hpp
+1268407832 /home/mallard/Projects/cobjectd/tcp_connection.hpp
 	<boost/asio.hpp>
 	<boost/bind.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/enable_shared_from_this.hpp>
+	"serialize.hpp"
 
 1268149440 source:/home/mallard/Projects/cobjectd/tcp_connection.cpp
 	"tcp_connection.hpp"
@@ -135,4 +136,11 @@
 
 1268145098 source:/home/mallard/Projects/cobjectd/tcp_server.cpp
 	"tcp_server.hpp"
+
+1268408001 /home/mallard/Projects/cobjectd/serialize.hpp
+	<iostream>
+	<vector>
+
+1268408042 source:/home/mallard/Projects/cobjectd/serialize.cpp
+	"serialize.hpp"
 

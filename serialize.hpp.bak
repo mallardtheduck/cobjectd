@@ -1,0 +1,21 @@
+#ifndef SERIALIZE_HPP_INCLUDED
+#define SERIALIZE_HPP_INCLUDED
+
+#include <iostream>
+
+using namespace std;
+
+void Serialize(ostream &s, const string &v);
+
+template<typename T> void Serialize(ostream &s, const vector<T> &v){
+    s << v.length();
+    for(size_t i=0; i<v.length(); i++){
+        Serialize(s, v.at(i));
+    }
+}
+
+template<typename T> void Serialize(ostream &s, const T &v){
+    s << v;
+}
+
+#endif // SERIALIZE_HPP_INCLUDED

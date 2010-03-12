@@ -42,6 +42,8 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="tcp_connection.cpp" />
 		<Unit filename="tcp_connection.hpp" />
+		<Unit filename="tcp_server.cpp" />
+		<Unit filename="tcp_server.hpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
