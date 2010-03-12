@@ -1,0 +1,42 @@
+#include "tcp_connection.hpp"
+
+using namespace std;
+using namespace boost;
+using namespace boost::asio;
+using namespace boost::asio::ip;
+
+tcp_connection::pointer tcp_connection::create(io_service &io_service)
+{
+    return pointer(new tcp_connection(io_service));
+}
+
+tcp::socket& tcp_connection::socket()
+{
+    return socket_;
+}
+
+void tcp_connection::start()
+{
+    if(!socket_.is_open()) return;
+    message_ = "Hello world!";
+    async_write(socket_, buffer(message_),
+                bind(&tcp_connection::handle_write, shared_from_this(),
+                     placeholders::error,
+                     placeholders::bytes_transferred));
+    while(true){
+        array<char, 1> buf;
+        system::error_code error;
+        socket_.read_some(buffer(buf), error);
+        if(error) break;
+        //cout << buf[0];
+    }
+}
+
+tcp_connection::~tcp_connection()
+{
+    cout << "Connection from " << socket_.remote_endpoint().address().to_string();
+    cout << ":" << socket_.remote_endpoint().port();
+    cout << " (ID:" << this << ")";
+    cout << " terminated." << endl;
+}
+
