@@ -1,6 +1,7 @@
 #include "tcp_connection.hpp"
-
-#include <sstream>
+#include "socketstream.hpp"
+#include "handlemessage.hpp"
+#include "classregistry.hpp"
 
 using namespace std;
 using namespace boost;
@@ -20,19 +21,23 @@ tcp::socket& tcp_connection::socket()
 void tcp_connection::start()
 {
     if(!_socket.is_open()) return;
-    _message = "CO_SERVER";
-    stringstream s;
+    _message = "CO_BROKER";
+    socketstream s(_socket);
     Serialize(s, _message);
-    async_write(_socket, buffer(s.str()), bind(&tcp_connection::handle_write, shared_from_this(), placeholders::error,
-                        placeholders::bytes_transferred));
-    async_read(_socket, buffer(_buf), bind(&tcp_connection::handle_read, shared_from_this(), placeholders::error,
+    _msgID=0xdead;
+    async_read(_socket, buffer(&_msgID, sizeof(_msgID)), bind(&tcp_connection::handle_read, shared_from_this(), placeholders::error,
                         placeholders::bytes_transferred));
 }
 
+void tcp_connection::end_connection(){
+    _endconn=true;
+}
+
 void tcp_connection::handle_read(const system::error_code &ec, size_t s){
-    //cout << _buf[0];
-    if(s!=_buf.size()) cout << "Only " << s << " of " << _buf.size() << " bytes recieved!" << endl;
-    if(!ec) async_read(_socket, buffer(_buf), bind(&tcp_connection::handle_read, shared_from_this(),
+    if(ec) return;
+    cout << "Recieved MessageID " << _msgID << " from " << this << "." << endl;
+    HandleMessage(_msgID, shared_from_this());
+    if(!_endconn) async_read(_socket, buffer(&_msgID,sizeof(_msgID)), bind(&tcp_connection::handle_read, shared_from_this(),
                         placeholders::error, placeholders::bytes_transferred));
 }
 
@@ -42,5 +47,24 @@ tcp_connection::~tcp_connection()
     cout << ":" << _socket.remote_endpoint().port();
     cout << " (ID:" << this << ")";
     cout << " terminated." << endl;
+    GetClassRegistry().NotifyDisconnect(this);
 }
 
+void tcp_connection::send(const string &s){
+    async_write(_socket, buffer(s), bind(&tcp_connection::handle_write, shared_from_this(), placeholders::error,
+                            placeholders::bytes_transferred));
+}
+
+ClassInfo tcp_connection::GetClassInfo(const string &cls){
+    return _classes[cls];
+}
+
+shared_ptr<ObjectHandle> tcp_connection::GetObject(ObjectID_t oid){
+    return _refobjects[oid];
+}
+
+ObjectID_t tcp_connection::AddObject(shared_ptr<ObjectHandle> obj){
+    ObjectID_t newid=++_objectid;
+    _refobjects[newid]=obj;
+    return newid;
+}

@@ -13,7 +13,6 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
-					<Add option="-DCO_SERVER" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -33,36 +32,11 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 			<Add directory="../meta" />
-			<Add directory="../cobject-shared" />
 		</Compiler>
 		<Linker>
 			<Add library="../meta/bin/DebugLib/libmeta.a" />
-			<Add library="boost_system" />
-			<Add library="boost_filesystem" />
-			<Add library="pthread" />
 		</Linker>
-		<Unit filename="../cobject-shared/messages.hpp" />
-		<Unit filename="../cobject-shared/serialize.cpp" />
-		<Unit filename="../cobject-shared/serialize.hpp" />
-		<Unit filename="../cobject-shared/typemap.cpp" />
-		<Unit filename="../cobject-shared/typemap.hpp" />
-		<Unit filename="classregistry.cpp" />
-		<Unit filename="classregistry.hpp" />
-		<Unit filename="foreach.hpp" />
-		<Unit filename="handlemessage.cpp" />
-		<Unit filename="handlemessage.hpp" />
 		<Unit filename="main.cpp" />
-		<Unit filename="objecthandle.hpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="runcall.cpp" />
-		<Unit filename="runcall.hpp" />
-		<Unit filename="socketstream.cpp" />
-		<Unit filename="socketstream.hpp" />
-		<Unit filename="tcp_connection.cpp" />
-		<Unit filename="tcp_connection.hpp" />
-		<Unit filename="tcp_server.cpp" />
-		<Unit filename="tcp_server.hpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

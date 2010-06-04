@@ -15,7 +15,7 @@
 	"dbgfnwrap.hpp"
 	"comp_util.hpp"
 
-1267834187 /home/mallard/Projects/meta/metaclass.hpp
+1275397424 /home/mallard/Projects/meta/metaclass.hpp
 	<string>
 	<vector>
 	<map>
@@ -27,7 +27,7 @@
 	"metacontext.hpp"
 	"caller.hpp"
 
-1267368687 /home/mallard/Projects/meta/util.hpp
+1275130289 /home/mallard/Projects/meta/util.hpp
 	<typeinfo>
 	<boost/foreach.hpp>
 	"comp_util.hpp"
@@ -69,7 +69,7 @@
 	"comp_util.hpp"
 	"util.hpp"
 
-1267368529 /home/mallard/Projects/meta/caller.hpp
+1275133952 /home/mallard/Projects/meta/caller.hpp
 	<string>
 	"util.hpp"
 	"metacontext.hpp"
@@ -77,7 +77,7 @@
 	"tuple_util.hpp"
 	"exceptions.hpp"
 
-1267368560 /home/mallard/Projects/meta/exceptions.hpp
+1272542246 /home/mallard/Projects/meta/exceptions.hpp
 	<stdexcept>
 
 1267834295 /home/mallard/Projects/meta/metaobject.hpp
@@ -117,15 +117,20 @@
 	"util.hpp"
 	"fnwrap.hpp"
 
-1268407832 /home/mallard/Projects/cobjectd/tcp_connection.hpp
+1275567943 /home/mallard/Projects/cobjectd/tcp_connection.hpp
 	<boost/asio.hpp>
 	<boost/bind.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/enable_shared_from_this.hpp>
 	"serialize.hpp"
+	"messages.hpp"
+	"objecthandle.hpp"
 
-1268149440 source:/home/mallard/Projects/cobjectd/tcp_connection.cpp
+1275567846 source:/home/mallard/Projects/cobjectd/tcp_connection.cpp
 	"tcp_connection.hpp"
+	"socketstream.hpp"
+	"handlemessage.hpp"
+	"classregistry.hpp"
 
 1268144381 /home/mallard/Projects/cobjectd/tcp_server.hpp
 	<boost/asio.hpp>
@@ -137,10 +142,93 @@
 1268145098 source:/home/mallard/Projects/cobjectd/tcp_server.cpp
 	"tcp_server.hpp"
 
-1268408001 /home/mallard/Projects/cobjectd/serialize.hpp
+1268489987 /home/mallard/Projects/cobjectd/serialize.hpp
 	<iostream>
 	<vector>
+	<boost/cstdint.hpp>
 
-1268408042 source:/home/mallard/Projects/cobjectd/serialize.cpp
+1268490057 source:/home/mallard/Projects/cobjectd/serialize.cpp
 	"serialize.hpp"
+
+1268485232 source:/home/mallard/Projects/cobjectd/socketsteam.cpp
+	"socketstream.hpp"
+
+1268486301 /home/mallard/Projects/cobjectd/socketstream.hpp
+	<iostream>
+	<boost/iostreams/categories.hpp>
+	<boost/iostreams/stream.hpp>
+	<boost/asio.hpp>
+
+1268486338 source:/home/mallard/Projects/cobjectd/socketstream.cpp
+	"socketstream.hpp"
+
+1268491087 /home/mallard/Projects/cobjectd/messages.hpp
+	<boost/cstdint.hpp>
+	<string>
+
+1275505134 source:/home/mallard/Projects/cobjectd/handlemessage.cpp
+	"handlemessage.hpp"
+	"socketstream.hpp"
+	"serialize.hpp"
+	"classregistry.hpp"
+	"foreach.hpp"
+	"runcall.hpp"
+
+1269258851 /home/mallard/Projects/cobjectd/handlemessage.hpp
+	"messages.hpp"
+	"tcp_connection.hpp"
+
+1275242736 source:/home/mallard/Projects/cobject-shared/serialize.cpp
+	"serialize.hpp"
+
+1275476285 /home/mallard/Projects/cobject-shared/serialize.hpp
+	<iostream>
+	<vector>
+	<boost/cstdint.hpp>
+	<boost/any.hpp>
+	"messages.hpp"
+
+1275502777 /home/mallard/Projects/cobject-shared/messages.hpp
+	<boost/cstdint.hpp>
+	<string>
+	<vector>
+
+1275484840 source:/home/mallard/Projects/cobjectd/classregistry.cpp
+	"classregistry.hpp"
+	"foreach.hpp"
+	<sstream>
+
+1275483016 /home/mallard/Projects/cobjectd/classregistry.hpp
+	"tcp_connection.hpp"
+	<vector>
+	<map>
+	<string>
+	<boost/shared_ptr.hpp>
+	<boost/weak_ptr.hpp>
+
+1269261465 /home/mallard/Projects/cobjectd/foreach.hpp
+	"boost/foreach.hpp"
+
+1275502903 source:/home/mallard/Projects/cobject-shared/typemap.cpp
+	"typemap.hpp"
+	<typeinfo>
+	<boost/cstdint.hpp>
+	<string>
+	<meta.hpp>
+
+1270655185 /home/mallard/Projects/cobject-shared/typemap.hpp
+	"messages.hpp"
+	<typeinfo>
+
+1275501413 /home/mallard/Projects/cobjectd/runcall.hpp
+	"tcp_connection.hpp"
+
+1275568540 /home/mallard/Projects/cobjectd/objecthandle.hpp
+	<boost/shared_ptr.hpp>
+	"tcp_connection.hpp"
+
+1275506614 source:/home/mallard/Projects/cobjectd/runcall.cpp
+	"runcall.hpp"
+	"classregistry.hpp"
+	<stdexcept>
 

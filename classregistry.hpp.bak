@@ -1,0 +1,29 @@
+#ifndef CLASSREGISTRY_HPP_INCLUDED
+#define CLASSREGISTRY_HPP_INCLUDED
+
+#include "tcp_connection.hpp"
+
+#include <vector>
+#include <map>
+#include <string>
+
+#include <boost/shared_ptr.hpp>
+#include <boost/weak_ptr.hpp>
+
+using namespace std;
+using namespace boost;
+
+class ClassRegistry{
+    public:
+        string SetNamespace(shared_ptr<tcp_connection> conn, const string &ns);
+        void NotifyDisconnect(tcp_connection *conn);
+        vector<string> ListNamespaces();
+        shared_ptr<tcp_connection> GetConnection(const string &ns);
+    private:
+        map<string, weak_ptr<tcp_connection> > _nsmap;
+        CallID_t _callid;
+};
+
+ClassRegistry &GetClassRegistry();
+
+#endif // CLASSREGISTRY_HPP_INCLUDED
