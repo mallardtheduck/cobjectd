@@ -15,6 +15,8 @@ using namespace boost;
 using namespace boost::asio;
 using namespace boost::asio::ip;
 
+class ObjectHandle;
+
 class tcp_connection : public enable_shared_from_this<tcp_connection>
 {
 public:
@@ -35,8 +37,9 @@ public:
     ClassInfo GetClassInfo(const string &cls);
     shared_ptr<ObjectHandle> GetObject(ObjectID_t oid);
     ObjectID_t AddObject(shared_ptr<ObjectHandle> obj);
-    shared_ptr<tcp_connection> GetOwner(ObjectID_t oid);
-    ObjectID_t GetOwnerID(ObjectID_t oid);
+    void RemoveObject(ObjectID_t oid);
+    /*shared_ptr<tcp_connection> GetOwner(ObjectID_t oid);
+    ObjectID_t GetOwnerID(ObjectID_t oid);*/
 
 private:
     tcp_connection(io_service& io_service) : _socket(io_service), _endconn(false) {}

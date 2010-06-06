@@ -56,3 +56,7 @@ CallID_t ClassRegistry::NewCallID(shared_ptr<tcp_connection> conn, CallID_t acal
     calls[newcallid]=d;
     return newcallid;
 }
+
+CallDetails ClassRegistry::GetCallDetails(CallID_t cid){
+    return calls[cid];
+}

@@ -68,3 +68,7 @@ ObjectID_t tcp_connection::AddObject(shared_ptr<ObjectHandle> obj){
     _refobjects[newid]=obj;
     return newid;
 }
+
+void tcp_connection::RemoveObject(ObjectID_t oid){
+    _refobjects.erase(oid);
+}

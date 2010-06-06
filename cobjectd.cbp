@@ -52,6 +52,7 @@
 		<Unit filename="handlemessage.cpp" />
 		<Unit filename="handlemessage.hpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="objecthandle.cpp" />
 		<Unit filename="objecthandle.hpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>

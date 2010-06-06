@@ -52,6 +52,9 @@
 		<Unit filename="handlemessage.cpp" />
 		<Unit filename="handlemessage.hpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="objecthandle.hpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="runcall.cpp" />
 		<Unit filename="runcall.hpp" />
 		<Unit filename="socketstream.cpp" />

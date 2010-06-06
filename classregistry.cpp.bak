@@ -43,3 +43,20 @@ vector<string> ClassRegistry::ListNamespaces(){
     }
     return ret;
 }
+
+shared_ptr<tcp_connection> ClassRegistry::GetConnection(const string &ns){
+    return _nsmap[ns].lock();
+}
+
+CallID_t ClassRegistry::NewCallID(shared_ptr<tcp_connection> conn, CallID_t acallid){
+    CallID_t newcallid=++_callid;
+    CallDetails d;
+    d.appcallid=acallid;
+    d.connection=conn;
+    calls[newcallid]=d;
+    return newcallid;
+}
+
+CallDetails ClassRegistry::GetCallDetails(CallID_t cid){
+    
+}

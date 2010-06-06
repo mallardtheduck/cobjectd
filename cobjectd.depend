@@ -80,7 +80,7 @@
 1272542246 /home/mallard/Projects/meta/exceptions.hpp
 	<stdexcept>
 
-1267834295 /home/mallard/Projects/meta/metaobject.hpp
+1275841318 /home/mallard/Projects/meta/metaobject.hpp
 	<iostream>
 	<string>
 	<stdexcept>
@@ -100,7 +100,7 @@
 	"polywrapper.hpp"
 	"util.hpp"
 
-1267368608 /home/mallard/Projects/meta/new.hpp
+1275841085 /home/mallard/Projects/meta/new.hpp
 	"metaclass.hpp"
 	"metaobject.hpp"
 
@@ -117,7 +117,7 @@
 	"util.hpp"
 	"fnwrap.hpp"
 
-1275567943 /home/mallard/Projects/cobjectd/tcp_connection.hpp
+1275741398 /home/mallard/Projects/cobjectd/tcp_connection.hpp
 	<boost/asio.hpp>
 	<boost/bind.hpp>
 	<boost/shared_ptr.hpp>
@@ -126,7 +126,7 @@
 	"messages.hpp"
 	"objecthandle.hpp"
 
-1275567846 source:/home/mallard/Projects/cobjectd/tcp_connection.cpp
+1275740757 source:/home/mallard/Projects/cobjectd/tcp_connection.cpp
 	"tcp_connection.hpp"
 	"socketstream.hpp"
 	"handlemessage.hpp"
@@ -166,7 +166,7 @@
 	<boost/cstdint.hpp>
 	<string>
 
-1275505134 source:/home/mallard/Projects/cobjectd/handlemessage.cpp
+1275844409 source:/home/mallard/Projects/cobjectd/handlemessage.cpp
 	"handlemessage.hpp"
 	"socketstream.hpp"
 	"serialize.hpp"
@@ -178,10 +178,11 @@
 	"messages.hpp"
 	"tcp_connection.hpp"
 
-1275242736 source:/home/mallard/Projects/cobject-shared/serialize.cpp
+1275845556 source:/home/mallard/Projects/cobject-shared/serialize.cpp
 	"serialize.hpp"
+	<stdexcept>
 
-1275476285 /home/mallard/Projects/cobject-shared/serialize.hpp
+1275845840 /home/mallard/Projects/cobject-shared/serialize.hpp
 	<iostream>
 	<vector>
 	<boost/cstdint.hpp>
@@ -193,7 +194,7 @@
 	<string>
 	<vector>
 
-1275484840 source:/home/mallard/Projects/cobjectd/classregistry.cpp
+1275828790 source:/home/mallard/Projects/cobjectd/classregistry.cpp
 	"classregistry.hpp"
 	"foreach.hpp"
 	<sstream>
@@ -220,15 +221,22 @@
 	"messages.hpp"
 	<typeinfo>
 
-1275501413 /home/mallard/Projects/cobjectd/runcall.hpp
+1275840199 /home/mallard/Projects/cobjectd/runcall.hpp
 	"tcp_connection.hpp"
+	"classregistry.hpp"
 
-1275568540 /home/mallard/Projects/cobjectd/objecthandle.hpp
+1275839263 /home/mallard/Projects/cobjectd/objecthandle.hpp
 	<boost/shared_ptr.hpp>
 	"tcp_connection.hpp"
 
-1275506614 source:/home/mallard/Projects/cobjectd/runcall.cpp
+1275846988 source:/home/mallard/Projects/cobjectd/runcall.cpp
 	"runcall.hpp"
 	"classregistry.hpp"
 	<stdexcept>
+
+1275839311 source:/home/mallard/Projects/cobjectd/objecthandle.cpp
+	"objecthandle.hpp"
+	"serialize.hpp"
+	"messages.hpp"
+	<sstream>
 
