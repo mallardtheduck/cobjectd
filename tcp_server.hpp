@@ -13,16 +13,28 @@ using namespace boost;
 using namespace boost::asio;
 using namespace boost::asio::ip;
 
-class tcp_server
+namespace cobject
 {
-public:
-    tcp_server(io_service& io_service);
 
-private:
-    void start_accept();
+    /*!
+        Server class, handles new incoming connections.
+        This class "owns" an incoming socket and creates a new tcp_connection for each connection
+    */
+    class tcp_server
+    {
+    public:
+        /*!
+            Constructor
+            \param io_service   An asio io_service
+        */
+        tcp_server(io_service& io_service);
 
-    void handle_accept(tcp_connection::pointer new_connection, const system::error_code &error);
-    tcp::acceptor acceptor_;
-};
+    private:
+        void start_accept();
 
+        void handle_accept(tcp_connection::pointer new_connection, const system::error_code &error);
+        tcp::acceptor acceptor_;
+    };
+
+}
 #endif // TCP_SERVER_HPP_INCLUDED

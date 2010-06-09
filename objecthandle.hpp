@@ -6,15 +6,31 @@
 
 using namespace boost;
 
-class tcp_connection;
+namespace cobject
+{
+    class tcp_connection;
 
-struct ObjectHandle{
-    ObjectHandle(shared_ptr<tcp_connection> conn, ObjectID_t oid, vector<MethodInfo> meths) :
-        owner(conn), ownerid(oid), methods(meths) {}
-    ~ObjectHandle();
-    shared_ptr<tcp_connection> owner;
-    ObjectID_t ownerid;
-    vector<MethodInfo> methods;
-};
+    /*!
+        An object handle
+        Class holds information for contacting a specific object. Only one instance exists per object, shared
+        between connections that reference it.
+    */
+    struct ObjectHandle
+    {
+        /*!
+            Constructor
+            \param conn     The connection owning the object
+            \param oid      The ObjectID assigned by the owner
+            \param meths    The object's methods
+        */
+        ObjectHandle(shared_ptr<tcp_connection> conn, ObjectID_t oid, vector<MethodInfo> meths) :
+                owner(conn), ownerid(oid), methods(meths) {}
+        //! Destructor
+        ~ObjectHandle();
 
+        weak_ptr<tcp_connection> owner;     //!< The owning connection
+        ObjectID_t ownerid;                 //!< The owner-assigned ObjectID
+        vector<MethodInfo> methods;         //!< The object's methods
+    };
+}
 #endif // OBJECTHANDLE_HPP_INCLUDED

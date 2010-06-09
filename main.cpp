@@ -7,6 +7,8 @@
 
 #define VERSION "DEV"
 
+using namespace cobject;
+
 int main()
 {
     cout << "CrossObject Broker version: " << VERSION << endl;
