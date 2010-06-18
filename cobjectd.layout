@@ -4,11 +4,11 @@
 	<File name="../cobject-shared/messages.hpp" open="1" top="0" tabpos="1">
 		<Cursor position="4965" topLine="3" />
 	</File>
-	<File name="../cobject-shared/serialize.cpp" open="1" top="1" tabpos="11">
-		<Cursor position="237" topLine="15" />
+	<File name="../cobject-shared/serialize.cpp" open="1" top="0" tabpos="11">
+		<Cursor position="237" topLine="0" />
 	</File>
 	<File name="../cobject-shared/serialize.hpp" open="1" top="0" tabpos="2">
-		<Cursor position="3732" topLine="127" />
+		<Cursor position="3732" topLine="105" />
 	</File>
 	<File name="../cobject-shared/typemap.cpp" open="0" top="0" tabpos="12">
 		<Cursor position="161" topLine="10" />
@@ -16,17 +16,17 @@
 	<File name="../cobject-shared/typemap.hpp" open="1" top="0" tabpos="3">
 		<Cursor position="502" topLine="0" />
 	</File>
-	<File name="classregistry.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="1589" topLine="49" />
+	<File name="classregistry.cpp" open="1" top="0" tabpos="13">
+		<Cursor position="243" topLine="27" />
 	</File>
 	<File name="classregistry.hpp" open="1" top="0" tabpos="4">
-		<Cursor position="2285" topLine="48" />
+		<Cursor position="2285" topLine="30" />
 	</File>
 	<File name="foreach.hpp" open="0" top="0" tabpos="13">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="handlemessage.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="5676" topLine="141" />
+	<File name="handlemessage.cpp" open="1" top="1" tabpos="14">
+		<Cursor position="2170" topLine="65" />
 	</File>
 	<File name="handlemessage.hpp" open="1" top="0" tabpos="5">
 		<Cursor position="425" topLine="0" />
@@ -38,30 +38,30 @@
 		<Cursor position="280" topLine="0" />
 	</File>
 	<File name="objecthandle.hpp" open="1" top="0" tabpos="6">
-		<Cursor position="1075" topLine="5" />
+		<Cursor position="1075" topLine="0" />
 	</File>
-	<File name="runcall.cpp" open="0" top="0" tabpos="5">
-		<Cursor position="2716" topLine="63" />
+	<File name="runcall.cpp" open="1" top="0" tabpos="12">
+		<Cursor position="2656" topLine="35" />
 	</File>
 	<File name="runcall.hpp" open="1" top="0" tabpos="7">
-		<Cursor position="2433" topLine="31" />
+		<Cursor position="2433" topLine="9" />
 	</File>
 	<File name="socketstream.cpp" open="0" top="0" tabpos="6">
 		<Cursor position="660" topLine="0" />
 	</File>
 	<File name="socketstream.hpp" open="1" top="0" tabpos="8">
-		<Cursor position="1937" topLine="41" />
+		<Cursor position="1937" topLine="19" />
 	</File>
 	<File name="tcp_connection.cpp" open="0" top="0" tabpos="7">
 		<Cursor position="578" topLine="21" />
 	</File>
 	<File name="tcp_connection.hpp" open="1" top="0" tabpos="9">
-		<Cursor position="2675" topLine="78" />
+		<Cursor position="2675" topLine="57" />
 	</File>
 	<File name="tcp_server.cpp" open="0" top="0" tabpos="8">
 		<Cursor position="1008" topLine="3" />
 	</File>
 	<File name="tcp_server.hpp" open="1" top="0" tabpos="10">
-		<Cursor position="648" topLine="3" />
+		<Cursor position="648" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>
