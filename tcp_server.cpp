@@ -15,14 +15,14 @@ namespace cobject
 
     void tcp_server::start_accept()
     {
-        tcp_connection::pointer new_connection = tcp_connection::create(acceptor_.io_service());
+        tcp_connection::pointer new_connection = tcp_connection::create(acceptor_.get_io_service());
 
         acceptor_.async_accept(new_connection->socket(), bind(&tcp_server::handle_accept, this, new_connection,
                                placeholders::error));
 
     }
 
-    void tcp_server::handle_accept(tcp_connection::pointer new_connection, const system::error_code &error)
+    void tcp_server::handle_accept(tcp_connection::pointer new_connection, const boost::system::error_code &error)
     {
         cout << "New connection from: " << new_connection->socket().remote_endpoint().address().to_string();
         cout << ":" << new_connection->socket().remote_endpoint().port();

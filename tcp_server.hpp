@@ -32,7 +32,7 @@ namespace cobject
     private:
         void start_accept();
 
-        void handle_accept(tcp_connection::pointer new_connection, const system::error_code &error);
+        void handle_accept(tcp_connection::pointer new_connection, const boost::system::error_code &error);
         tcp::acceptor acceptor_;
     };
 

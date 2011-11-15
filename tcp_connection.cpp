@@ -37,7 +37,7 @@ namespace cobject
         _endconn=true;
     }
 
-    void tcp_connection::handle_read(const system::error_code &ec, size_t s)
+    void tcp_connection::handle_read(const boost::system::error_code &ec, size_t s)
     {
         if (ec) return;
         cout << "Recieved MessageID " << _msgID << " from " << this << "." << endl;

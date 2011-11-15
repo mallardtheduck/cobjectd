@@ -91,8 +91,8 @@ namespace cobject
 
     private:
         tcp_connection(io_service& io_service) : _socket(io_service), _endconn(false) {}
-        void handle_write(const system::error_code&, size_t) {}
-        void handle_read(const system::error_code &ec, size_t s);
+        void handle_write(const boost::system::error_code&, size_t) {}
+        void handle_read(const boost::system::error_code &ec, size_t s);
 
         tcp::socket _socket;
         std::string _message;

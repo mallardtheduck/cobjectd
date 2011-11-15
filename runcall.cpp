@@ -85,6 +85,10 @@ namespace cobject
         stringstream out;
         shared_ptr<ObjectHandle> handle(new ObjectHandle(from, oid, vector<MethodInfo>()));
         shared_ptr<tcp_connection> to=cd.connection.lock();
+        if(!to){ //Destination no longer connected, nothing we can do except abort.
+            //TODO: Possibly send destruction msg?
+            return;
+        }
         ObjectID_t newid=to->AddObject(handle);
         Serialize(out, Messages::ConstructObject);
         Serialize(out, cd.appcallid);
