@@ -28,8 +28,8 @@ namespace cobject
         socketstream s(_socket);
         Serialize(s, _message);
         _msgID=0xdead;
-        async_read(_socket, buffer(&_msgID, sizeof(_msgID)), bind(&tcp_connection::handle_read, shared_from_this(), placeholders::error,
-                   placeholders::bytes_transferred));
+        async_read(_socket, buffer(&_msgID, sizeof(_msgID)), bind(&tcp_connection::handle_read, shared_from_this(), asio::placeholders::error,
+                   asio::placeholders::bytes_transferred));
     }
 
     void tcp_connection::end_connection()
@@ -43,7 +43,7 @@ namespace cobject
         cout << "Recieved MessageID " << _msgID << " from " << this << "." << endl;
         HandleMessage(_msgID, shared_from_this());
         if (!_endconn) async_read(_socket, buffer(&_msgID,sizeof(_msgID)), bind(&tcp_connection::handle_read, shared_from_this(),
-                                      placeholders::error, placeholders::bytes_transferred));
+                                      asio::placeholders::error, asio::placeholders::bytes_transferred));
     }
 
     tcp_connection::~tcp_connection()
@@ -57,8 +57,8 @@ namespace cobject
 
     void tcp_connection::send(const string &s)
     {
-        async_write(_socket, buffer(s), bind(&tcp_connection::handle_write, shared_from_this(), placeholders::error,
-                                             placeholders::bytes_transferred));
+        async_write(_socket, buffer(s), bind(&tcp_connection::handle_write, shared_from_this(), asio::placeholders::error,
+                                             asio::placeholders::bytes_transferred));
     }
 
     ClassInfo tcp_connection::GetClassInfo(const string &cls)
@@ -66,12 +66,12 @@ namespace cobject
         return _classes[cls];
     }
 
-    shared_ptr<ObjectHandle> tcp_connection::GetObject(ObjectID_t oid)
+    boost::shared_ptr<ObjectHandle> tcp_connection::GetObject(ObjectID_t oid)
     {
         return _refobjects[oid];
     }
 
-    ObjectID_t tcp_connection::AddObject(shared_ptr<ObjectHandle> obj)
+    ObjectID_t tcp_connection::AddObject(boost::shared_ptr<ObjectHandle> obj)
     {
         ObjectID_t newid=++_objectid;
         _refobjects[newid]=obj;

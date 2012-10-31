@@ -18,7 +18,7 @@ namespace cobject
         tcp_connection::pointer new_connection = tcp_connection::create(acceptor_.get_io_service());
 
         acceptor_.async_accept(new_connection->socket(), bind(&tcp_server::handle_accept, this, new_connection,
-                               placeholders::error));
+                               asio::placeholders::error));
 
     }
 

@@ -6,8 +6,9 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
 
-#include "serialize.hpp"
-#include "messages.hpp"
+#include <cobject-client/serialize.hpp>
+#include <cobject-client/messages.hpp>
+
 #include "objecthandle.hpp"
 
 using namespace std;
@@ -26,10 +27,10 @@ namespace cobject
         class exists per application connection. It is the server-side equivelent of the client's Connection
         class.
     */
-    class tcp_connection : public enable_shared_from_this<tcp_connection>
+    class tcp_connection : public boost::enable_shared_from_this<tcp_connection>
     {
     public:
-        typedef shared_ptr<tcp_connection> pointer;     //!< Typdef for pointer to this class
+        typedef boost::shared_ptr<tcp_connection> pointer;     //!< Typdef for pointer to this class
 
         /*!
             Construction function
@@ -59,7 +60,7 @@ namespace cobject
         string nsName;      //!< Namespace used by this connection
 
         //! HandleMessage may access private elements of this class
-        friend void HandleMessage(MessageID_t msgID, shared_ptr<tcp_connection> conn);
+        friend void HandleMessage(MessageID_t msgID, boost::shared_ptr<tcp_connection> conn);
 
         /*!
             Asynchrously send some data using this connection's socket
@@ -74,15 +75,15 @@ namespace cobject
         /*!
             Get the handle to an object used by this connection
             \param oid  The ObjectID
-            \return shared_ptr to the ObjectHandle
+            \return boost::shared_ptr to the ObjectHandle
         */
-        shared_ptr<ObjectHandle> GetObject(ObjectID_t oid);
+        boost::shared_ptr<ObjectHandle> GetObject(ObjectID_t oid);
         /*!
             Add an object to this connection's list of used objects
             \param obj  The handle of the object to add
             \return This connection's ObjectID for the added object
         */
-        ObjectID_t AddObject(shared_ptr<ObjectHandle> obj);
+        ObjectID_t AddObject(boost::shared_ptr<ObjectHandle> obj);
         /*!
             Remove an object from this connection's list of used objects
             \param oid  The ObjectID
@@ -100,7 +101,7 @@ namespace cobject
         ObjectID_t _objectid;
         bool _endconn;
         map<string, ClassInfo> _classes;
-        map<ObjectID_t, shared_ptr<ObjectHandle> > _refobjects;
+        map<ObjectID_t, boost::shared_ptr<ObjectHandle> > _refobjects;
     };
 
 }

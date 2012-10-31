@@ -1,6 +1,5 @@
 #include "handlemessage.hpp"
 #include "socketstream.hpp"
-#include "serialize.hpp"
 #include "classregistry.hpp"
 #include "foreach.hpp"
 #include "runcall.hpp"
@@ -10,7 +9,7 @@ using namespace std;
 namespace cobject
 {
 
-    void HandleMessage(MessageID_t msgID, shared_ptr<tcp_connection> conn)
+    void HandleMessage(MessageID_t msgID, boost::shared_ptr<tcp_connection> conn)
     {
         socketstream s(conn->socket());
         try
@@ -37,7 +36,7 @@ namespace cobject
                 vector<string> ret;
                 string ns;
                 Deserialize(s, ns);
-                shared_ptr<tcp_connection> ptr=GetClassRegistry().GetConnection(ns);
+                boost::shared_ptr<tcp_connection> ptr=GetClassRegistry().GetConnection(ns);
                 foreach(Q(pair<string, ClassInfo>) p, ptr->_classes)
                 {
                     ret.push_back(p.first);
@@ -71,7 +70,7 @@ namespace cobject
                 string ns, cls;
                 Deserialize(s, ns);
                 Deserialize(s, cls);
-                shared_ptr<tcp_connection> ptr=GetClassRegistry().GetConnection(ns);
+                boost::shared_ptr<tcp_connection> ptr=GetClassRegistry().GetConnection(ns);
                 ClassInfo info=ptr->_classes[cls];
                 Serialize(s, Messages::GetClassDef);
                 Serialize(s, ns);
@@ -83,7 +82,7 @@ namespace cobject
             {
                 ObjectID_t oid;
                 Deserialize(s, oid);
-                shared_ptr<ObjectHandle> objh=conn->GetObject(oid);
+                boost::shared_ptr<ObjectHandle> objh=conn->GetObject(oid);
                 Serialize(s, Messages::GetObjectDef);
                 Serialize(s, oid);
                 Serialize(s, objh->methods);
@@ -95,7 +94,7 @@ namespace cobject
                 vector<MethodInfo> info;
                 Deserialize(s, aoid);
                 Deserialize(s, info);
-                shared_ptr<ObjectHandle> objh(new ObjectHandle(conn, aoid, info));
+                boost::shared_ptr<ObjectHandle> objh(new ObjectHandle(conn, aoid, info));
                 ObjectID_t oid=conn->AddObject(objh);
                 Serialize(s, Messages::RegisterObject);
                 Serialize(s, aoid);

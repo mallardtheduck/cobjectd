@@ -15,9 +15,9 @@ namespace cobject
         return theReg;
     }
 
-    string ClassRegistry::SetNamespace(shared_ptr<tcp_connection> conn, const string &ns)
+    string ClassRegistry::SetNamespace(boost::shared_ptr<tcp_connection> conn, const string &ns)
     {
-        weak_ptr<tcp_connection> wconn(conn);
+        boost::weak_ptr<tcp_connection> wconn(conn);
         string tns=ns;
         if (_nsmap.find(ns)!=_nsmap.end())
         {
@@ -25,16 +25,16 @@ namespace cobject
             s << ns << "_" << conn.get();
             tns=s.str();
         }
-        _nsmap.insert(pair<string, weak_ptr<tcp_connection> >(tns, wconn));
+        _nsmap.insert(pair<string, boost::weak_ptr<tcp_connection> >(tns, wconn));
         return tns;
     }
 
     void ClassRegistry::NotifyDisconnect(tcp_connection *conn)
     {
         vector<string> todelete;
-        foreach(Q(pair<string, weak_ptr<tcp_connection> >) p, _nsmap)
+        foreach(Q(pair<string, boost::weak_ptr<tcp_connection> >) p, _nsmap)
         {
-            shared_ptr<tcp_connection> sp=p.second.lock();
+            boost::shared_ptr<tcp_connection> sp=p.second.lock();
             if (!sp || sp.get()==conn)
             {
                 todelete.push_back(p.first);
@@ -49,19 +49,19 @@ namespace cobject
     vector<string> ClassRegistry::ListNamespaces()
     {
         vector<string> ret;
-        foreach(Q(pair<string, weak_ptr<tcp_connection> >) p, _nsmap)
+        foreach(Q(pair<string, boost::weak_ptr<tcp_connection> >) p, _nsmap)
         {
             ret.push_back(p.first);
         }
         return ret;
     }
 
-    shared_ptr<tcp_connection> ClassRegistry::GetConnection(const string &ns)
+    boost::shared_ptr<tcp_connection> ClassRegistry::GetConnection(const string &ns)
     {
         return _nsmap[ns].lock();
     }
 
-    CallID_t ClassRegistry::NewCallID(shared_ptr<tcp_connection> conn, CallID_t acallid)
+    CallID_t ClassRegistry::NewCallID(boost::shared_ptr<tcp_connection> conn, CallID_t acallid)
     {
         CallID_t newcallid=++_callid;
         CallDetails d;

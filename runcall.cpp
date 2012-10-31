@@ -8,7 +8,7 @@ using namespace boost;
 namespace cobject
 {
 
-    bool CheckArgs(shared_ptr<tcp_connection> conn, shared_ptr<tcp_connection> toconn, MethodInfo mi, vector<TypedVal> &args)
+    bool CheckArgs(boost::shared_ptr<tcp_connection> conn, boost::shared_ptr<tcp_connection> toconn, MethodInfo mi, vector<TypedVal> &args)
     {
         if (mi.ParamTypes.size()!=args.size()) return false;
         for (size_t i=0; i<mi.ParamTypes.size(); ++i)
@@ -24,7 +24,7 @@ namespace cobject
         return true;
     }
 
-    MethodInfo GetMethodInfo(shared_ptr<tcp_connection> conn, const string &cls, const string &method)
+    MethodInfo GetMethodInfo(boost::shared_ptr<tcp_connection> conn, const string &cls, const string &method)
     {
         ClassInfo clsi=conn->GetClassInfo(cls);
         for (size_t i=0; i<clsi.Methods.size(); ++i)
@@ -41,9 +41,9 @@ namespace cobject
         throw std::exception(); //ERROR!
     }
 
-    void RunConstruct(shared_ptr<tcp_connection> conn, const string &ns, const string &cls, CallID_t callid, vector<TypedVal> args)
+    void RunConstruct(boost::shared_ptr<tcp_connection> conn, const string &ns, const string &cls, CallID_t callid, vector<TypedVal> args)
     {
-        shared_ptr<tcp_connection> toconn=GetClassRegistry().GetConnection(ns);
+        boost::shared_ptr<tcp_connection> toconn=GetClassRegistry().GetConnection(ns);
         stringstream out;
         Serialize(out, Messages::Construct);
         Serialize(out, cls);
@@ -54,9 +54,9 @@ namespace cobject
         toconn->send(out.str());
     }
 
-    void RunCallStatic(shared_ptr<tcp_connection> conn, const string &ns, const string &cls, const string &method, CallID_t callid, vector<TypedVal> args)
+    void RunCallStatic(boost::shared_ptr<tcp_connection> conn, const string &ns, const string &cls, const string &method, CallID_t callid, vector<TypedVal> args)
     {
-        shared_ptr<tcp_connection> toconn=GetClassRegistry().GetConnection(ns);
+        boost::shared_ptr<tcp_connection> toconn=GetClassRegistry().GetConnection(ns);
         stringstream out;
         Serialize(out, Messages::StaticCall);
         Serialize(out, cls);
@@ -67,9 +67,9 @@ namespace cobject
         toconn->send(out.str());
     }
 
-    void RunCallMethod(shared_ptr<tcp_connection> conn, ObjectID_t objectid, const string &method, CallID_t callid, vector<TypedVal> args)
+    void RunCallMethod(boost::shared_ptr<tcp_connection> conn, ObjectID_t objectid, const string &method, CallID_t callid, vector<TypedVal> args)
     {
-        shared_ptr<tcp_connection> toconn=conn->GetObject(objectid)->owner.lock();
+        boost::shared_ptr<tcp_connection> toconn=conn->GetObject(objectid)->owner.lock();
         stringstream out;
         Serialize(out, Messages::MethodCall);
         Serialize(out, conn->GetObject(objectid)->ownerid);
@@ -80,11 +80,11 @@ namespace cobject
         toconn->send(out.str());
     }
 
-    void RunConstructReply(CallDetails cd, ObjectID_t oid, shared_ptr<tcp_connection> from)
+    void RunConstructReply(CallDetails cd, ObjectID_t oid, boost::shared_ptr<tcp_connection> from)
     {
         stringstream out;
-        shared_ptr<ObjectHandle> handle(new ObjectHandle(from, oid, vector<MethodInfo>()));
-        shared_ptr<tcp_connection> to=cd.connection.lock();
+        boost::shared_ptr<ObjectHandle> handle(new ObjectHandle(from, oid, vector<MethodInfo>()));
+        boost::shared_ptr<tcp_connection> to=cd.connection.lock();
         if(!to){ //Destination no longer connected, nothing we can do except abort.
             //TODO: Possibly send destruction msg?
             return;

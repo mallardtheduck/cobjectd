@@ -1,7 +1,9 @@
 #ifndef HANDLEMESSAGE_HPP_INCLUDED
 #define HANDLEMESSAGE_HPP_INCLUDED
 
-#include "messages.hpp"
+#include <cobject-client/serialize.hpp>
+#include <cobject-client/messages.hpp>
+
 #include "tcp_connection.hpp"
 
 namespace cobject
@@ -14,7 +16,7 @@ namespace cobject
         \param msgID    The protocol MessageID
         \param conn     The connection that it comes from
     */
-    void HandleMessage(MessageID_t msgID, shared_ptr<tcp_connection> conn);
+    void HandleMessage(MessageID_t msgID, boost::shared_ptr<tcp_connection> conn);
 }
 
 #endif // HANDLEMESSAGE_HPP_INCLUDED

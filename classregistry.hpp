@@ -19,7 +19,7 @@ namespace cobject
     //! Structure to hold details of a call in progress
     struct CallDetails
     {
-        weak_ptr<tcp_connection> connection;    //!< Connection that the call came from
+        boost::weak_ptr<tcp_connection> connection;    //!< Connection that the call came from
         CallID_t appcallid;                     //!< CallID for the call from that connection
     };
 
@@ -35,7 +35,7 @@ namespace cobject
             \param ns       The requested namespace
             \return The actual set namespace
         */
-        string SetNamespace(shared_ptr<tcp_connection> conn, const string &ns);
+        string SetNamespace(boost::shared_ptr<tcp_connection> conn, const string &ns);
         /*!
             Notify this class that a connection has ended, remove references to it.
             \param conn     The connection
@@ -51,14 +51,14 @@ namespace cobject
             \param ns   The namespace
             \return The connection
         */
-        shared_ptr<tcp_connection> GetConnection(const string &ns);
+        boost::shared_ptr<tcp_connection> GetConnection(const string &ns);
         /*!
             Set up a new call (and get an ID)
             \param conn     The connection that the call is from
             \param acallid  The original call id
             \return A new CallID to refer to the call
         */
-        CallID_t NewCallID(shared_ptr<tcp_connection> conn, CallID_t acallid);
+        CallID_t NewCallID(boost::shared_ptr<tcp_connection> conn, CallID_t acallid);
         /*!
             Get the call details from a CallID
             \param callid   The CallID
@@ -66,7 +66,7 @@ namespace cobject
         */
         CallDetails GetCallDetails(CallID_t callid);
     private:
-        map<string, weak_ptr<tcp_connection> > _nsmap;
+        map<string, boost::weak_ptr<tcp_connection> > _nsmap;
         CallID_t _callid;
         map<CallID_t, CallDetails> calls;
     };
