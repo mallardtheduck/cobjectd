@@ -1,7 +1,7 @@
 CC?=g++
 CFLAGS=-c -Wall -std=gnu++0x
 LDFLAGS=
-LIBS=-lmeta -lboost_system -lboost_thread -lcobject-client
+LIBS=-lmeta -lboost_system -lboost_thread -lcobject-client -lprofiler
 SOURCES=classregistry.cpp main.cpp runcall.cpp tcp_connection.cpp handlemessage.cpp objecthandle.cpp socketstream.cpp tcp_server.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 TARGET=cobjectd
@@ -16,12 +16,12 @@ $(TARGET): $(OBJECTS)
 .cpp.o:
 	$(CC) $(CFLAGS) $< -o $@
 	
-install: all $(INSTALL_HEADERS_DIR)
-	cp $(LIB) $(INSTALL_LIBS_DIR)
-	cp *.hpp $(INSTALL_HEADERS_DIR)
-	
-$(INSTALL_HEADERS_DIR):
-	mkdir $(INSTALL_HEADERS_DIR)
+install: all
 
 clean: 
 	rm -f $(TARGET) *.o
+
+relink: rmtarget all
+
+rmtarget:
+	rm -f $(TARGET)
