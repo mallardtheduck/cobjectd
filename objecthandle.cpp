@@ -1,4 +1,5 @@
 #include "objecthandle.hpp"
+#include "trace.hpp"
 
 #include <sstream>
 
@@ -9,6 +10,7 @@ namespace cobject
 
     ObjectHandle::~ObjectHandle()
     {
+		TRACE;
         stringstream s;
         Serialize(s, Messages::FreeObject);
         Serialize(s, ownerid);

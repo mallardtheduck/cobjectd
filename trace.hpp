@@ -24,20 +24,20 @@
 /*!
     Enable tracing for this function/method
 */
-#define TRACE static int callid=0; callid++;\
-    do{if(TraceToggleCount==0) std::clog << __PRETTY_FUNCTION__ << ":" << callid << ": START" << std::endl;}while(false);\
+#define TRACE static int trace_callid=0; trace_callid++;\
+    do{if(TraceToggleCount==0) std::clog << __PRETTY_FUNCTION__ << ":" << trace_callid << ": START" << std::endl;}while(false);\
     std::stringstream _endmsgss;\
-    _endmsgss << __PRETTY_FUNCTION__ << ":" << callid << ": END"; \
+    _endmsgss << __PRETTY_FUNCTION__ << ":" << trace_callid << ": END"; \
     clog_at_end _cae(_endmsgss.str())
 
 /*!
     Trace EXPression; add an expression and its result to the trace
 */
-#define TEXP(x) do{if(TraceToggleCount==0) std::clog << __PRETTY_FUNCTION__ << ":" << callid << ":" << #x << ":" << x << std::endl;}while(false)
+#define TEXP(x) do{if(TraceToggleCount==0) std::clog << __PRETTY_FUNCTION__ << ":" << trace_callid << ":" << #x << ":" << x << std::endl;}while(false)
 /*!
     Trace COMent; add an arbitary string to the trace
 */
-#define TCOM(x) do{if(TraceToggleCount==0) std::clog << __PRETTY_FUNCTION__ << ":" << callid << ":" << x << std::endl;}while(false)
+#define TCOM(x) do{if(TraceToggleCount==0) std::clog << __PRETTY_FUNCTION__ << ":" << trace_callid << ":" << x << std::endl;}while(false)
 /*!
     Turn tracing off temporarily
 */

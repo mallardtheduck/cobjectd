@@ -1,5 +1,6 @@
 #include "runcall.hpp"
 #include "classregistry.hpp"
+#include "trace.hpp"
 
 #include <stdexcept>
 
@@ -10,6 +11,7 @@ namespace cobject
 
     bool CheckArgs(boost::shared_ptr<tcp_connection> conn, boost::shared_ptr<tcp_connection> toconn, MethodInfo mi, vector<TypedVal> &args)
     {
+		TRACE;
         if (mi.ParamTypes.size()!=args.size()) return false;
         for (size_t i=0; i<mi.ParamTypes.size(); ++i)
         {
@@ -26,6 +28,7 @@ namespace cobject
 
     MethodInfo GetMethodInfo(boost::shared_ptr<tcp_connection> conn, const string &cls, const string &method)
     {
+		TRACE;
         ClassInfo clsi=conn->GetClassInfo(cls);
         for (size_t i=0; i<clsi.Methods.size(); ++i)
         {
@@ -43,6 +46,7 @@ namespace cobject
 
     void RunConstruct(boost::shared_ptr<tcp_connection> conn, const string &ns, const string &cls, CallID_t callid, vector<TypedVal> args)
     {
+		TRACE;
         boost::shared_ptr<tcp_connection> toconn=GetClassRegistry().GetConnection(ns);
         stringstream out;
         Serialize(out, Messages::Construct);
@@ -56,6 +60,7 @@ namespace cobject
 
     void RunCallStatic(boost::shared_ptr<tcp_connection> conn, const string &ns, const string &cls, const string &method, CallID_t callid, vector<TypedVal> args)
     {
+		TRACE;
         boost::shared_ptr<tcp_connection> toconn=GetClassRegistry().GetConnection(ns);
         stringstream out;
         Serialize(out, Messages::StaticCall);
@@ -69,6 +74,7 @@ namespace cobject
 
     void RunCallMethod(boost::shared_ptr<tcp_connection> conn, ObjectID_t objectid, const string &method, CallID_t callid, vector<TypedVal> args)
     {
+		TRACE;
         boost::shared_ptr<tcp_connection> toconn=conn->GetObject(objectid)->owner.lock();
         stringstream out;
         Serialize(out, Messages::MethodCall);
@@ -82,6 +88,7 @@ namespace cobject
 
     void RunConstructReply(CallDetails cd, ObjectID_t oid, boost::shared_ptr<tcp_connection> from)
     {
+		TRACE;
         stringstream out;
         boost::shared_ptr<ObjectHandle> handle(new ObjectHandle(from, oid, vector<MethodInfo>()));
         boost::shared_ptr<tcp_connection> to=cd.connection.lock();
@@ -99,6 +106,7 @@ namespace cobject
 
     void RunCallStaticReply(CallDetails cd, TypedVal ret)
     {
+		TRACE;
         stringstream out;
         Serialize(out, Messages::CallStatic);
         Serialize(out, cd.appcallid);
@@ -109,6 +117,7 @@ namespace cobject
 
     void RunCallMethodReply(CallDetails cd, TypedVal ret)
     {
+		TRACE;
         stringstream out;
         Serialize(out, Messages::CallMethod);
         Serialize(out, cd.appcallid);
