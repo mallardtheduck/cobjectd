@@ -3,6 +3,7 @@
 #include "classregistry.hpp"
 #include "foreach.hpp"
 #include "runcall.hpp"
+#include "trace.hpp"
 
 using namespace std;
 
@@ -11,6 +12,7 @@ namespace cobject
 
     void HandleMessage(MessageID_t msgID, boost::shared_ptr<tcp_connection> conn)
     {
+		TRACE;
         socketstream s(conn->socket());
         try
         {
@@ -188,7 +190,9 @@ namespace cobject
         }
         catch (...)
         {
-            throw;
+			TCOM("Connection error!");
+			GetClassRegistry().NotifyDisconnect(conn.get());
+            conn->end_connection();
         }
     }
 }
