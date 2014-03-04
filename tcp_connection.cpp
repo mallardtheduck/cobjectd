@@ -2,7 +2,7 @@
 #include "socketstream.hpp"
 #include "handlemessage.hpp"
 #include "classregistry.hpp"
-#include <google/profiler.h>
+//#include <google/profiler.h>
 #include "trace.hpp"
 
 using namespace std;
@@ -28,7 +28,7 @@ namespace cobject
     void tcp_connection::start()
     {
 		TRACE;
-    	ProfilerStart("/tmp/cobject.prof");
+//    	ProfilerStart("/tmp/cobject.prof");
         if (!_socket.is_open()) return;
         _message = "CO_BROKER";
         socketstream s(_socket);
@@ -62,7 +62,7 @@ namespace cobject
         cout << " (ID:" << this << ")";
         cout << " terminated." << endl;
         GetClassRegistry().NotifyDisconnect(this);
-        ProfilerStop();
+//        ProfilerStop();
     }
 
     void tcp_connection::send(const string &s)
