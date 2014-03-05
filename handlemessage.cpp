@@ -1,5 +1,5 @@
+#include <cobject-client/socketstream.hpp>
 #include "handlemessage.hpp"
-#include "socketstream.hpp"
 #include "classregistry.hpp"
 #include "foreach.hpp"
 #include "runcall.hpp"

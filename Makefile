@@ -3,7 +3,7 @@ CFLAGS=-c -Wall -std=gnu++0x -g
 LDFLAGS=
 LIBS=-lmeta -lboost_system -lboost_thread -lcobject-client -lpthread -lstdc++
 #-lprofiler
-SOURCES=classregistry.cpp main.cpp runcall.cpp tcp_connection.cpp handlemessage.cpp objecthandle.cpp socketstream.cpp tcp_server.cpp
+SOURCES=classregistry.cpp main.cpp runcall.cpp tcp_connection.cpp handlemessage.cpp objecthandle.cpp tcp_server.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 TARGET=cobjectd
 INSTALL_PATH?=/usr/local
