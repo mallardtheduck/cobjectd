@@ -1,6 +1,7 @@
 CC?=g++
 CFLAGS=-c -Wall -std=gnu++0x -g
 LDFLAGS=
+NDEBUG?=
 LIBS=-lmeta -lboost_system -lboost_thread -lcobject-client -lpthread -lstdc++
 #-lprofiler
 SOURCES=classregistry.cpp main.cpp runcall.cpp tcp_connection.cpp handlemessage.cpp objecthandle.cpp tcp_server.cpp
@@ -15,7 +16,7 @@ $(TARGET): $(OBJECTS)
 	$(CC) $(LDFLAGS) -o $@ $(OBJECTS) $(LIBS)
 
 .cpp.o:
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(NDEBUG) $(CFLAGS) $< -o $@
 	
 install: all
 
